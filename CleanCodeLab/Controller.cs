@@ -7,42 +7,49 @@ namespace CleanCodeLab
 {
     public class Controller
     {
+        private IUI ui;
+
+        public Controller(IUI ui)
+        {
+            this.ui = ui;
+        }
+
         public void RunGame()
         {
             bool playOn = true;
-            Console.WriteLine("Enter your user name:\n");
-            string playerName = Console.ReadLine();
+            ui.WriteString("Enter your user name:\n");
+            string playerName = ui.GetString();
 
             while (playOn)
             {
                 string numberCode = make4DigitNumber();
 
 
-                Console.WriteLine("New game:\n");
+                ui.WriteString("New game:\n");
                 //comment out or remove next line to play real games!
-                Console.WriteLine("For practice, number is: " + numberCode + "\n");
-                string guess = Console.ReadLine();
+                ui.WriteString("For practice, number is: " + numberCode + "\n");
+                string guess = ui.GetString();
 
                 int nGuess = 1;
                 string checkedGuess = checkGuess(numberCode, guess);
-                Console.WriteLine(checkedGuess + "\n");
+                ui.WriteString(checkedGuess + "\n");
                 while (checkedGuess != "BBBB,")
                 {
                     nGuess++;
-                    guess = Console.ReadLine();
-                    Console.WriteLine(guess + "\n");
+                    guess = ui.GetString();
+                    ui.WriteString(guess + "\n");
                     checkedGuess = checkGuess(numberCode, guess);
-                    Console.WriteLine(checkedGuess + "\n");
+                    ui.WriteString(checkedGuess + "\n");
                 }
                 StreamWriter output = new StreamWriter("result.txt", append: true);
                 output.WriteLine(playerName + "#&#" + nGuess);
                 output.Close();
-                showScoreBoard();
-                Console.WriteLine("Correct, it took " + nGuess + " guesses\nContinue?");
-                string answer = Console.ReadLine();
+                showScoreBoard(ui);
+                ui.WriteString("Correct, it took " + nGuess + " guesses\nContinue?");
+                string answer = ui.GetString();
                 if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
                 {
-                    playOn = false;
+                    ui.Quit();
                 }
             }
         }
@@ -88,7 +95,7 @@ namespace CleanCodeLab
             return "BBBB".Substring(0, numberOfBs) + "," + "CCCC".Substring(0, numberOfCs);
         }
 
-        static void showScoreBoard()
+        static void showScoreBoard(IUI ui)
         {
             StreamReader input = new StreamReader("result.txt");
             List<PlayerData> results = new List<PlayerData>();
@@ -112,10 +119,10 @@ namespace CleanCodeLab
 
             }
             results.Sort((p1, p2) => p1.Average().CompareTo(p2.Average()));
-            Console.WriteLine("Player   games average");
+            ui.WriteString("Player   games average");
             foreach (PlayerData p in results)
             {
-                Console.WriteLine(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NGames, p.Average()));
+                ui.WriteString(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NGames, p.Average()));
             }
             input.Close();
         }

@@ -4,12 +4,13 @@ using System.Collections.Generic;
 
 namespace CleanCodeLab
 {
-    class MainClass
+    class Program
     {
 
         public static void Main(string[] args)
         {
-            Controller controller = new Controller();
+            IUI ui = new ConsoleIO();
+            Controller controller = new Controller(ui);
             controller.RunGame();
         }
     }
