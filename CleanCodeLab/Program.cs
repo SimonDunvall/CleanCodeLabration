@@ -12,33 +12,33 @@ namespace MooGame
 
             bool playOn = true;
             Console.WriteLine("Enter your user name:\n");
-            string name = Console.ReadLine();
+            string playerName = Console.ReadLine();
 
             while (playOn)
             {
-                string goal = makeGoal();
+                string numberCode = make4DigitNumber();
 
 
                 Console.WriteLine("New game:\n");
                 //comment out or remove next line to play real games!
-                Console.WriteLine("For practice, number is: " + goal + "\n");
+                Console.WriteLine("For practice, number is: " + numberCode + "\n");
                 string guess = Console.ReadLine();
 
                 int nGuess = 1;
-                string bbcc = checkBC(goal, guess);
-                Console.WriteLine(bbcc + "\n");
-                while (bbcc != "BBBB,")
+                string checkedGuess = checkGuess(numberCode, guess);
+                Console.WriteLine(checkedGuess + "\n");
+                while (checkedGuess != "BBBB,")
                 {
                     nGuess++;
                     guess = Console.ReadLine();
                     Console.WriteLine(guess + "\n");
-                    bbcc = checkBC(goal, guess);
-                    Console.WriteLine(bbcc + "\n");
+                    checkedGuess = checkGuess(numberCode, guess);
+                    Console.WriteLine(checkedGuess + "\n");
                 }
                 StreamWriter output = new StreamWriter("result.txt", append: true);
-                output.WriteLine(name + "#&#" + nGuess);
+                output.WriteLine(playerName + "#&#" + nGuess);
                 output.Close();
-                showTopList();
+                showScoreBoard();
                 Console.WriteLine("Correct, it took " + nGuess + " guesses\nContinue?");
                 string answer = Console.ReadLine();
                 if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
@@ -47,50 +47,50 @@ namespace MooGame
                 }
             }
         }
-        static string makeGoal()
+
+        static string make4DigitNumber()
         {
             Random randomGenerator = new Random();
-            string goal = "";
+            string numberCode = "";
             for (int i = 0; i < 4; i++)
             {
                 int random = randomGenerator.Next(10);
                 string randomDigit = "" + random;
-                while (goal.Contains(randomDigit))
+                while (numberCode.Contains(randomDigit))
                 {
                     random = randomGenerator.Next(10);
                     randomDigit = "" + random;
                 }
-                goal = goal + randomDigit;
+                numberCode = numberCode + randomDigit;
             }
-            return goal;
+            return numberCode;
         }
 
-        static string checkBC(string goal, string guess)
+        static string checkGuess(string numberCode, string guess)
         {
-            int cows = 0, bulls = 0;
+            int numberOfCs = 0, numberOfBs = 0;
             guess += "    ";     // if player entered less than 4 chars
             for (int i = 0; i < 4; i++)
             {
                 for (int j = 0; j < 4; j++)
                 {
-                    if (goal[i] == guess[j])
+                    if (numberCode[i] == guess[j])
                     {
                         if (i == j)
                         {
-                            bulls++;
+                            numberOfBs++;
                         }
                         else
                         {
-                            cows++;
+                            numberOfCs++;
                         }
                     }
                 }
             }
-            return "BBBB".Substring(0, bulls) + "," + "CCCC".Substring(0, cows);
+            return "BBBB".Substring(0, numberOfBs) + "," + "CCCC".Substring(0, numberOfCs);
         }
 
-
-        static void showTopList()
+        static void showScoreBoard()
         {
             StreamReader input = new StreamReader("result.txt");
             List<PlayerData> results = new List<PlayerData>();
@@ -98,9 +98,9 @@ namespace MooGame
             while ((line = input.ReadLine()) != null)
             {
                 string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
-                string name = nameAndScore[0];
+                string playerName = nameAndScore[0];
                 int guesses = Convert.ToInt32(nameAndScore[1]);
-                PlayerData pd = new PlayerData(name, guesses);
+                PlayerData pd = new PlayerData(playerName, guesses);
                 int pos = results.IndexOf(pd);
                 if (pos < 0)
                 {
