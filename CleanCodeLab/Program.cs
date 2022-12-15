@@ -10,7 +10,7 @@ namespace CleanCodeLab
         public static void Main(string[] args)
         {
             IUI ui = new ConsoleIO();
-            ScoreBoard scoreBoard = new ScoreBoard();
+            ScoreBoard scoreBoard = new ScoreBoard(ui);
             GameLogic gameLogic = new GameLogic();
             Controller controller = new Controller(ui, scoreBoard, gameLogic);
             controller.RunGame();

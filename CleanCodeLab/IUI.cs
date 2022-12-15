@@ -9,6 +9,5 @@ namespace CleanCodeLab
     {
         string GetString();
         void WriteString(string s);
-        void Quit();
     }
 }

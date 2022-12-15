@@ -7,15 +7,22 @@ namespace CleanCodeLab
 {
     public class ScoreBoard
     {
-        public void Statistics(string playerName, int nGuess, IUI ui)
+        private IUI ui;
+
+        public ScoreBoard(IUI ui)
+        {
+            this.ui = ui;
+        }
+
+        public void Statistics(string playerName, int nGuess)
         {
             StreamWriter output = new StreamWriter("result.txt", append: true);
             output.WriteLine(playerName + "#&#" + nGuess);
             output.Close();
-            showScoreBoard(ui);
+            showScoreBoard();
         }
 
-        static void showScoreBoard(IUI ui)
+        private void showScoreBoard()
         {
             StreamReader input = new StreamReader("result.txt");
             List<PlayerData> results = new List<PlayerData>();

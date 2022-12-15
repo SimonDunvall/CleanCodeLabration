@@ -20,38 +20,30 @@ namespace CleanCodeLab
 
         public void RunGame()
         {
-            bool playOn = true;
-            string playerName = startMeny();
+            string answer;
 
-            while (playOn)
+            ui.WriteString("Enter your user name:\n");
+            string playerName = ui.GetString();
+
+            do
             {
                 int nGuess = game();
 
-
-                scoreBoard.Statistics(playerName, nGuess, ui);
-
-                answer = endMeny(nGuess);
-
-
-            } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
-        }
+                scoreBoard.Statistics(playerName, nGuess);
 
                 ui.WriteString("Correct, it took " + nGuess + " guesses\nContinue?");
-                string answer = ui.GetString();
-                if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
-                {
-                    ui.Quit();
-                }
-            }
+                answer = ui.GetString();
+            } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
         }
 
         private int game()
         {
             string numberCode = gameLogic.make4DigitNumber();
 
-            dispay(numberCode);
+            ui.WriteString("New game:\n");
+            //comment out or remove next line to play real games!
+            ui.WriteString("For practice, number is: " + numberCode + "\n");
             string guess = ui.GetString();
-
 
 
             int nGuess = 1;
@@ -68,19 +60,6 @@ namespace CleanCodeLab
             }
 
             return nGuess;
-        }
-
-        private void dispay(string numberCode)
-        {
-            ui.WriteString("New game:\n");
-            //comment out or remove next line to play real games!
-            ui.WriteString("For practice, number is: " + numberCode + "\n");
-        }
-
-        private string startMeny()
-        {
-            ui.WriteString("Enter your user name:\n");
-            return ui.GetString();
         }
     }
 }
