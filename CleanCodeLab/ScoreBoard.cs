@@ -19,14 +19,14 @@ namespace CleanCodeLab
             StreamWriter output = new StreamWriter("result.txt", append: true);
             output.WriteLine(playerName + "#&#" + nGuess);
             output.Close();
-            showScoreBoard();
+            showScoreBoard(ui);
         }
 
-        private void showScoreBoard()
+        private void showScoreBoard(IUI ui)
         {
             StreamReader input = new StreamReader("result.txt");
             List<PlayerData> results = new List<PlayerData>();
-            string line;
+            string? line;
             while ((line = input.ReadLine()) != null)
             {
                 string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
