@@ -17,18 +17,25 @@ namespace CleanCodeLab
         public void showScoreBoard()
         {
             StreamReader input = new StreamReader("result.txt");
-            List<PlayerData> results = getResults(input);
+            List<PlayerData> results = ConvertToPlayerDataList(input);
             displayScoreBoard(results);
             input.Close();
         }
 
-        private List<PlayerData> getResults(StreamReader input)
+        public void AddData(string playerName, int nGuess)
+        {
+            StreamWriter output = new StreamWriter("result.txt", append: true);
+            output.WriteLine(playerName + "#&#" + nGuess);
+            output.Close();
+        }
+
+        private List<PlayerData> ConvertToPlayerDataList(StreamReader input)
         {
             List<PlayerData> results = new List<PlayerData>();
             string? line;
             while ((line = input.ReadLine()) != null)
             {
-                PlayerData pd = getPlayerData(line);
+                PlayerData pd = CreatePlayerFromString(line);
 
                 int pos = results.IndexOf(pd);
                 if (pos < 0)
@@ -44,7 +51,7 @@ namespace CleanCodeLab
             return results;
         }
 
-        private PlayerData getPlayerData(string line)
+        private PlayerData CreatePlayerFromString(string line)
         {
             string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
             string playerName = nameAndScore[0];
@@ -60,13 +67,6 @@ namespace CleanCodeLab
             {
                 ui.DisplayString(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NGames, p.Average()));
             }
-        }
-
-        internal void AddData(string playerName, int nGuess)
-        {
-            StreamWriter output = new StreamWriter("result.txt", append: true);
-            output.WriteLine(playerName + "#&#" + nGuess);
-            output.Close();
         }
     }
 }
