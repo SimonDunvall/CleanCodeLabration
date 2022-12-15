@@ -14,25 +14,22 @@ namespace CleanCodeLab
             this.ui = ui;
         }
 
-        public void Statistics(string playerName, int nGuess)
-        {
-            StreamWriter output = new StreamWriter("result.txt", append: true);
-            output.WriteLine(playerName + "#&#" + nGuess);
-            output.Close();
-            showScoreBoard(ui);
-        }
-
-        private void showScoreBoard(IUI ui)
+        public void showScoreBoard()
         {
             StreamReader input = new StreamReader("result.txt");
+            List<PlayerData> results = getResults(input);
+            displayScoreBoard(results);
+            input.Close();
+        }
+
+        private List<PlayerData> getResults(StreamReader input)
+        {
             List<PlayerData> results = new List<PlayerData>();
             string? line;
             while ((line = input.ReadLine()) != null)
             {
-                string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
-                string playerName = nameAndScore[0];
-                int guesses = Convert.ToInt32(nameAndScore[1]);
-                PlayerData pd = new PlayerData(playerName, guesses);
+                PlayerData pd = getPlayerData(line);
+
                 int pos = results.IndexOf(pd);
                 if (pos < 0)
                 {
@@ -40,18 +37,36 @@ namespace CleanCodeLab
                 }
                 else
                 {
-                    results[pos].Update(guesses);
+                    results[pos].Update(pd.totalGuess);
                 }
-
-
             }
+
+            return results;
+        }
+
+        private PlayerData getPlayerData(string line)
+        {
+            string[] nameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
+            string playerName = nameAndScore[0];
+            int guesses = Convert.ToInt32(nameAndScore[1]);
+            return new PlayerData(playerName, guesses);
+        }
+
+        private void displayScoreBoard(List<PlayerData> results)
+        {
             results.Sort((p1, p2) => p1.Average().CompareTo(p2.Average()));
-            ui.WriteString("Player   games average");
+            ui.DisplayString("Player   games average");
             foreach (PlayerData p in results)
             {
-                ui.WriteString(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NGames, p.Average()));
+                ui.DisplayString(string.Format("{0,-9}{1,5:D}{2,9:F2}", p.Name, p.NGames, p.Average()));
             }
-            input.Close();
+        }
+
+        internal void AddData(string playerName, int nGuess)
+        {
+            StreamWriter output = new StreamWriter("result.txt", append: true);
+            output.WriteLine(playerName + "#&#" + nGuess);
+            output.Close();
         }
     }
 }

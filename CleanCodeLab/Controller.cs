@@ -22,41 +22,48 @@ namespace CleanCodeLab
         {
             string answer;
 
-            ui.WriteString("Enter your user name:\n");
+            ui.DisplayString("Enter your user name:\n");
             string playerName = ui.GetString();
 
             do
             {
                 int nGuess = game();
 
-                scoreBoard.Statistics(playerName, nGuess);
+                handleStatistics(playerName, nGuess);
 
-                ui.WriteString("Correct, it took " + nGuess + " guesses\nContinue?");
+                ui.DisplayString("Correct, it took " + nGuess + " guesses\nContinue?");
                 answer = ui.GetString();
             } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
+        }
+
+        private void handleStatistics(string playerName, int nGuess)
+        {
+            scoreBoard.AddData(playerName, nGuess);
+
+            scoreBoard.showScoreBoard();
         }
 
         private int game()
         {
             string numberCode = gameLogic.make4DigitNumber();
 
-            ui.WriteString("New game:\n");
+            ui.DisplayString("New game:\n");
             //comment out or remove next line to play real games!
-            ui.WriteString("For practice, number is: " + numberCode + "\n");
+            ui.DisplayString("For practice, number is: " + numberCode + "\n");
             string guess = ui.GetString();
 
 
             int nGuess = 1;
             string checkedGuess = gameLogic.checkGuess(numberCode, guess);
-            ui.WriteString(checkedGuess + "\n");
+            ui.DisplayString(checkedGuess + "\n");
 
             while (checkedGuess != "BBBB,")
             {
                 nGuess++;
                 guess = ui.GetString();
-                ui.WriteString(guess + "\n");
+                ui.DisplayString(guess + "\n");
                 checkedGuess = gameLogic.checkGuess(numberCode, guess);
-                ui.WriteString(checkedGuess + "\n");
+                ui.DisplayString(checkedGuess + "\n");
             }
 
             return nGuess;

@@ -8,6 +8,6 @@ namespace CleanCodeLab
     public interface IUI
     {
         string GetString();
-        void WriteString(string s);
+        void DisplayString(string s);
     }
 }

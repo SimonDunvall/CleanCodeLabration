@@ -16,7 +16,7 @@ namespace CleanCodeLab
                 return s;
         }
 
-        public void WriteString(string s)
+        public void DisplayString(string s)
         {
             Console.WriteLine(s);
         }

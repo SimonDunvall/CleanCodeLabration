@@ -4,7 +4,7 @@ namespace CleanCodeLab
     {
         public string Name { get; private set; }
         public int NGames { get; private set; }
-        int totalGuess;
+        public int totalGuess;
 
 
         public PlayerData(string name, int guesses)
@@ -25,10 +25,10 @@ namespace CleanCodeLab
             return (double)totalGuess / NGames;
         }
 
-        /*public override bool Equals(Object p)
+        public override bool Equals(Object p)
         {
             return Name.Equals(((PlayerData)p).Name);
-        }*/
+        }
 
         public override int GetHashCode()
         {
