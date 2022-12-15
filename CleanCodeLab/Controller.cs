@@ -25,27 +25,7 @@ namespace CleanCodeLab
 
             while (playOn)
             {
-                string numberCode = gameLogic.make4DigitNumber();
-
-                dispay(numberCode);
-                string guess = ui.GetString();
-
-
-
-                int nGuess = 1;
-                string checkedGuess = gameLogic.checkGuess(numberCode, guess);
-                ui.WriteString(checkedGuess + "\n");
-
-                while (checkedGuess != "BBBB,")
-                {
-                    nGuess++;
-                    guess = ui.GetString();
-                    //ui.WriteString(guess + "\n");
-                    checkedGuess = gameLogic.checkGuess(numberCode, guess);
-                    ui.WriteString(checkedGuess + "\n");
-                }
-
-
+                int nGuess = game();
 
 
                 scoreBoard.Statistics(playerName, nGuess, ui);
@@ -57,6 +37,31 @@ namespace CleanCodeLab
                     ui.Quit();
                 }
             }
+        }
+
+        private int game()
+        {
+            string numberCode = gameLogic.make4DigitNumber();
+
+            dispay(numberCode);
+            string guess = ui.GetString();
+
+
+
+            int nGuess = 1;
+            string checkedGuess = gameLogic.checkGuess(numberCode, guess);
+            ui.WriteString(checkedGuess + "\n");
+
+            while (checkedGuess != "BBBB,")
+            {
+                nGuess++;
+                guess = ui.GetString();
+                ui.WriteString(guess + "\n");
+                checkedGuess = gameLogic.checkGuess(numberCode, guess);
+                ui.WriteString(checkedGuess + "\n");
+            }
+
+            return nGuess;
         }
 
         private void dispay(string numberCode)
