@@ -30,6 +30,12 @@ namespace CleanCodeLab
 
                 scoreBoard.Statistics(playerName, nGuess, ui);
 
+                answer = endMeny(nGuess);
+
+
+            } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
+        }
+
                 ui.WriteString("Correct, it took " + nGuess + " guesses\nContinue?");
                 string answer = ui.GetString();
                 if (answer != null && answer != "" && answer.Substring(0, 1) == "n")
