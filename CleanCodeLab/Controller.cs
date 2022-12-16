@@ -27,7 +27,7 @@ namespace CleanCodeLab
 
             do
             {
-                int nGuess = game();
+                int nGuess = handleGame();
 
                 handleStatistics(playerName, nGuess);
 
@@ -39,11 +39,10 @@ namespace CleanCodeLab
         private void handleStatistics(string playerName, int nGuess)
         {
             scoreBoard.AddData(playerName, nGuess);
-
             scoreBoard.showScoreBoard();
         }
 
-        private int game()
+        private int handleGame()
         {
             string numberCode = gameLogic.make4DigitNumber();
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLab
 {
+
     public class ScoreBoard
     {
         private IUI ui;
@@ -18,8 +19,8 @@ namespace CleanCodeLab
         {
             StreamReader input = new StreamReader("result.txt");
             List<PlayerData> results = ConvertToPlayerDataList(input);
-            displayScoreBoard(results);
             input.Close();
+            displayScoreBoard(results);
         }
 
         public void AddData(string playerName, int nGuess)
@@ -47,7 +48,6 @@ namespace CleanCodeLab
                     results[pos].Update(pd.totalGuess);
                 }
             }
-
             return results;
         }
 
