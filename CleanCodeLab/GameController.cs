@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLab
 {
-    public class Controller
+    public class GameController
     {
         private IUI ui;
         private ScoreBoard scoreBoard;
         private GameLogic gameLogic;
 
-        public Controller(IUI ui, ScoreBoard s, GameLogic g)
+        public GameController(IUI ui, ScoreBoard s, GameLogic g)
         {
             this.ui = ui;
             scoreBoard = s;
@@ -27,6 +27,8 @@ namespace CleanCodeLab
 
             do
             {
+                ui.DisplayString("New game:\n");
+
                 int nGuess = handleGame();
 
                 handleStatistics(playerName, nGuess);
@@ -46,24 +48,20 @@ namespace CleanCodeLab
         {
             string numberCode = gameLogic.make4DigitNumber();
 
-            ui.DisplayString("New game:\n");
             //comment out or remove next line to play real games!
             ui.DisplayString("For practice, number is: " + numberCode + "\n");
-            string guess = ui.GetString();
 
 
-            int nGuess = 1;
-            string checkedGuess = gameLogic.checkGuess(numberCode, guess);
-            ui.DisplayString(checkedGuess + "\n");
-
-            while (checkedGuess != "BBBB,")
+            int nGuess = 0;
+            string checkedGuess;
+            do
             {
                 nGuess++;
-                guess = ui.GetString();
+                string guess = ui.GetString().Trim();
                 ui.DisplayString(guess + "\n");
                 checkedGuess = gameLogic.checkGuess(numberCode, guess);
                 ui.DisplayString(checkedGuess + "\n");
-            }
+            } while (checkedGuess != "BBBB,");
 
             return nGuess;
         }

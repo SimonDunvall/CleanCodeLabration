@@ -11,16 +11,14 @@ namespace CleanCodeLab
         {
             Random randomGenerator = new Random();
             string numberCode = "";
-            for (int i = 0; i < 4; i++)
+            while (numberCode.Length < 4)
             {
-                int random = randomGenerator.Next(10);
-                string randomDigit = "" + random;
-                while (numberCode.Contains(randomDigit))
+                string randomDigit;
+                do
                 {
-                    random = randomGenerator.Next(10);
-                    randomDigit = "" + random;
-                }
-                numberCode = numberCode + randomDigit;
+                    randomDigit = randomGenerator.Next(10).ToString();
+                } while (numberCode.Contains(randomDigit));
+                numberCode += randomDigit;
             }
             return numberCode;
         }
@@ -29,20 +27,18 @@ namespace CleanCodeLab
         {
             int numberOfCs = 0, numberOfBs = 0;
             guess += "    ";     // if player entered less than 4 chars
-            for (int i = 0; i < 4; i++)
+            foreach (char digit in guess)
             {
-                for (int j = 0; j < 4; j++)
+                if (numberCode.Contains(digit))
                 {
-                    if (numberCode[i] == guess[j])
+                    int index = guess.IndexOf(digit);
+                    if (numberCode[index] == digit)
                     {
-                        if (i == j)
-                        {
-                            numberOfBs++;
-                        }
-                        else
-                        {
-                            numberOfCs++;
-                        }
+                        numberOfBs++;
+                    }
+                    else
+                    {
+                        numberOfCs++;
                     }
                 }
             }
