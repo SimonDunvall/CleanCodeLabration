@@ -1,6 +1,6 @@
 namespace CleanCodeLab
 {
-    public interface IDataBase
+    public interface IScoreBoard
     {
         void AddData(string playerName, int nGuess);
         void DisplayData();

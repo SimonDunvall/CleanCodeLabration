@@ -25,7 +25,7 @@ namespace CleanCodeLab
             {
                 throw new NullReferenceException();
             }
-            IDataBase scoreBoard = new ScoreBoard(ui, game); //dp injected game so that scoreboard knows with games scoreboard to use
+            IScoreBoard scoreBoard = new ScoreBoard(ui, game); //dp injected game so that scoreboard knows with games scoreboard to use
             GameController controller = new GameController(ui, scoreBoard, gameLogic);
             controller.StartGame();
         }
