@@ -10,9 +10,8 @@ namespace CleanCodeLab
         public static void Main(string[] args)
         {
             IUI ui = new ConsoleIO();
-            ScoreBoard scoreBoard = new ScoreBoard(ui);
             Menu menu = new Menu();
-            MenuController controller = new MenuController(ui, menu, scoreBoard);
+            MenuController controller = new MenuController(ui, menu);
             controller.Run();
         }
     }

@@ -5,6 +5,6 @@ namespace CleanCodeLab
         string checkGuess(string code, string guess);
         string correctGuess();
         string exampleGuess();
-        string GenerateRandomCode();
+        string generateRandomCode();
     }
 }

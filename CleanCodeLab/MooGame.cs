@@ -8,7 +8,7 @@ namespace CleanCodeLab
 
     public class MooGame : IGameLogic
     {
-        public string GenerateRandomCode()
+        public string generateRandomCode()
         {
             Random rnd = new Random();
             string code = "";

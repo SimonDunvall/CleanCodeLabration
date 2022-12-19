@@ -24,12 +24,13 @@ namespace CleanCodeLab
             this.gameLogic = gameLogic;
         }
 
-        internal void StartGame(IUI ui, ScoreBoard s)
+        internal void StartGame(IUI ui, string game)
         {
             if (gameLogic == null)
             {
                 throw new NullReferenceException();
             }
+            ScoreBoard s = new ScoreBoard(ui, game);
             GameController controller = new GameController(ui, s, gameLogic);
             controller.Run();
         }

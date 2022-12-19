@@ -15,7 +15,7 @@ namespace CleanCodeLabTests.Tests
         public void RandomNumbersAreUnique()
         {
             IGameLogic gameLogic = new MooGame();
-            string value = gameLogic.GenerateRandomCode();
+            string value = gameLogic.generateRandomCode();
             bool IsUnique = IsStringUnique(value);
             Assert.IsTrue(IsUnique);
         }
@@ -39,7 +39,7 @@ namespace CleanCodeLabTests.Tests
         public void NumberCodeIsRightLength()
         {
             IGameLogic gameLogic = new MooGame();
-            string value = gameLogic.GenerateRandomCode();
+            string value = gameLogic.generateRandomCode();
             Assert.AreEqual(4, value.Length);
         }
 
@@ -47,7 +47,7 @@ namespace CleanCodeLabTests.Tests
         public void CheckIfStringOnlyContainsNumbers()
         {
             IGameLogic gameLogic = new MooGame();
-            string value = gameLogic.GenerateRandomCode();
+            string value = gameLogic.generateRandomCode();
             Assert.IsTrue(Regex.IsMatch(value, "^[0-9]+$"));
         }
 

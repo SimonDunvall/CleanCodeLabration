@@ -9,25 +9,24 @@ namespace CleanCodeLab
     {
         private IUI ui;
         private Menu menu;
-        private ScoreBoard scoreBoard;
 
-        public MenuController(IUI ui, Menu menu, ScoreBoard scoreBoard)
+        public MenuController(IUI ui, Menu menu)
         {
             this.ui = ui;
             this.menu = menu;
-            this.scoreBoard = scoreBoard;
         }
 
         internal void Run()
         {
             bool IsGameChosen;
+            string input;
             do
             {
                 ui.DisplayString("Do you want to play Moogame or Mastermind?\n");
-                string input = ui.GetString().Trim().ToLower();
+                input = ui.GetString().Trim().ToLower();
                 IsGameChosen = choseGame(input);
             } while (!IsGameChosen);
-            menu.StartGame(ui, scoreBoard);
+            menu.StartGame(ui, input);
         }
 
         private bool choseGame(string input)

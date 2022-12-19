@@ -30,7 +30,7 @@ namespace CleanCodeLab
             return result;
         }
 
-        public string GenerateRandomCode()
+        public string generateRandomCode()
         {
             Random rnd = new Random();
             string[] colors = { "red", "green", "white", "orange", "black", "blue", "yellow", "brown" };

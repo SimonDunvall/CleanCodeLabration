@@ -38,21 +38,15 @@ namespace CleanCodeLab
             } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
         }
 
-        private void display()
-        {
-            ui.DisplayString("New game:");
-            ui.DisplayString($"guess example: {gameLogic.exampleGuess()} \n");
-        }
-
         private void handleStatistics(string playerName, int nGuess)
         {
             scoreBoard.AddData(playerName, nGuess);
-            scoreBoard.showScoreBoard();
+            scoreBoard.displayData();
         }
 
         private int handleGame()
         {
-            string code = gameLogic.GenerateRandomCode();
+            string code = gameLogic.generateRandomCode();
 
             //comment out or remove next line to play real games!
             ui.DisplayString("For practice, code is: " + code + "\n");
@@ -75,6 +69,12 @@ namespace CleanCodeLab
                 ui.DisplayString(checkedGuess + "\n");
             } while (checkedGuess != gameLogic.correctGuess());
             return nGuess;
+        }
+
+        private void display()
+        {
+            ui.DisplayString("New game:");
+            ui.DisplayString($"guess example: {gameLogic.exampleGuess()} \n");
         }
     }
 }
