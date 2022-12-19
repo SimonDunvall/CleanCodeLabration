@@ -8,7 +8,7 @@ namespace CleanCodeLabTests.Tests
     public class MooGameTests
     {
         [TestMethod]
-        public void RandomNumbersAreUnique()
+        public void RandomNumbersAreUnique() //for GenerateRandomCode
         {
             IGameLogic gameLogic = new MooGame();
             string code = gameLogic.GenerateRandomCode();
@@ -32,7 +32,7 @@ namespace CleanCodeLabTests.Tests
         }
 
         [TestMethod]
-        public void NumberCodeIsRightLength()
+        public void NumberCodeIsRightLength() //for GenerateRandomCode
         {
             IGameLogic gameLogic = new MooGame();
             string code = gameLogic.GenerateRandomCode();
@@ -40,7 +40,7 @@ namespace CleanCodeLabTests.Tests
         }
 
         [TestMethod]
-        public void CheckIfStringOnlyContainsNumbers()
+        public void CheckIfStringOnlyContainsNumbers() //for GenerateRandomCode
         {
             IGameLogic gameLogic = new MooGame();
             string code = gameLogic.GenerateRandomCode();
@@ -50,7 +50,7 @@ namespace CleanCodeLabTests.Tests
         [TestMethod]
         public void GuessIsRight()
         {
-            IGameLogic gameLogic = new MooGame();
+            IGameLogic gameLogic = new MooGame(); //for CheckGuess
             string code = Mock4DigitNumber();
             string guess = Mock4DigitNumber();
             string checkedGuess = gameLogic.CheckGuess(code, guess);
@@ -58,7 +58,7 @@ namespace CleanCodeLabTests.Tests
         }
 
         [TestMethod]
-        public void GuessGivesPredictedOutCome()
+        public void GuessGivesPredictedOutCome() //for CheckGuess
         {
             IUI MockUI = new MockIO();
             IGameLogic gameLogic = new MooGame();
