@@ -27,7 +27,7 @@ namespace CleanCodeLab
 
             do
             {
-                ui.DisplayString("New game:\n");
+                display();
 
                 int nGuess = handleGame();
 
@@ -38,6 +38,12 @@ namespace CleanCodeLab
             } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
         }
 
+        private void display()
+        {
+            ui.DisplayString("New game:");
+            ui.DisplayString($"guess example: {gameLogic.exampleGuess()} \n");
+        }
+
         private void handleStatistics(string playerName, int nGuess)
         {
             scoreBoard.AddData(playerName, nGuess);
@@ -46,12 +52,12 @@ namespace CleanCodeLab
 
         private int handleGame()
         {
-            string numberCode = gameLogic.GenerateRandomCode();
+            string code = gameLogic.GenerateRandomCode();
 
             //comment out or remove next line to play real games!
-            ui.DisplayString("For practice, number is: " + numberCode + "\n");
+            ui.DisplayString("For practice, code is: " + code + "\n");
 
-            int nGuess = gameLogic.RunGame(numberCode);
+            int nGuess = gameLogic.RunGame(code);
 
             return nGuess;
         }

@@ -17,14 +17,14 @@ namespace CleanCodeLab
 
         public string GenerateRandomCode()
         {
-            Random randomGenerator = new Random();
+            Random rnd = new Random();
             string code = "";
-            while (code.Length < 4)
+            while (code.Count() < 4)
             {
                 string randomDigit;
                 do
                 {
-                    randomDigit = randomGenerator.Next(10).ToString();
+                    randomDigit = rnd.Next(10).ToString();
                 } while (code.Contains(randomDigit));
                 code += randomDigit;
             }
@@ -64,9 +64,20 @@ namespace CleanCodeLab
                 ui.DisplayString(guess + "\n");
                 checkedGuess = checkGuess(code, guess);
                 ui.DisplayString(checkedGuess + "\n");
+
             } while (checkedGuess != "BBBB,");
 
             return nGuess;
+        }
+
+        private void Input()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string exampleGuess()
+        {
+            return "1234";
         }
     }
 }
