@@ -11,9 +11,8 @@ namespace CleanCodeLab
         {
             IUI ui = new ConsoleIO();
             ScoreBoard scoreBoard = new ScoreBoard(ui);
-            IGameLogic mooGame = new MooGame(ui);
-            IGameLogic masterMind = new MasterMind(ui);
-            GameController controller = new GameController(ui, scoreBoard, masterMind);
+            Menu menu = new Menu();
+            MenuController controller = new MenuController(ui, menu, scoreBoard);
             controller.Run();
         }
     }
