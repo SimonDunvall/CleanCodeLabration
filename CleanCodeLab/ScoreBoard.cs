@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLab
 {
-    public class ScoreBoard
+    public class ScoreBoard : IDataBase
     {
         private IUI ui;
         private readonly string game;

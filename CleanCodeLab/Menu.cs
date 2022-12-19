@@ -30,7 +30,7 @@ namespace CleanCodeLab
             {
                 throw new NullReferenceException();
             }
-            ScoreBoard s = new ScoreBoard(ui, game);
+            IDataBase s = new ScoreBoard(ui, game);
             GameController controller = new GameController(ui, s, gameLogic);
             controller.Run();
         }

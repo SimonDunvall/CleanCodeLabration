@@ -8,10 +8,10 @@ namespace CleanCodeLab
     public class GameController
     {
         private IUI ui;
-        private ScoreBoard scoreBoard;
+        private IDataBase scoreBoard;
         private IGameLogic gameLogic;
 
-        public GameController(IUI ui, ScoreBoard s, IGameLogic g)
+        public GameController(IUI ui, IDataBase s, IGameLogic g)
         {
             this.ui = ui;
             scoreBoard = s;
