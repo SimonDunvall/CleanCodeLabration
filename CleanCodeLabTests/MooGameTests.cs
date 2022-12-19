@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using CleanCodeLab;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,8 +11,8 @@ namespace CleanCodeLabTests.Tests
         public void RandomNumbersAreUnique()
         {
             IGameLogic gameLogic = new MooGame();
-            string value = gameLogic.generateRandomCode();
-            bool IsUnique = IsStringUnique(value);
+            string code = gameLogic.GenerateRandomCode();
+            bool IsUnique = IsStringUnique(code);
             Assert.IsTrue(IsUnique);
         }
 
@@ -39,26 +35,26 @@ namespace CleanCodeLabTests.Tests
         public void NumberCodeIsRightLength()
         {
             IGameLogic gameLogic = new MooGame();
-            string value = gameLogic.generateRandomCode();
-            Assert.AreEqual(4, value.Length);
+            string code = gameLogic.GenerateRandomCode();
+            Assert.AreEqual(4, code.Length);
         }
 
         [TestMethod]
         public void CheckIfStringOnlyContainsNumbers()
         {
             IGameLogic gameLogic = new MooGame();
-            string value = gameLogic.generateRandomCode();
-            Assert.IsTrue(Regex.IsMatch(value, "^[0-9]+$"));
+            string code = gameLogic.GenerateRandomCode();
+            Assert.IsTrue(Regex.IsMatch(code, "^[0-9]+$"));
         }
 
         [TestMethod]
         public void GuessIsRight()
         {
             IGameLogic gameLogic = new MooGame();
-            string numberCode = Mock4DigitNumber();
+            string code = Mock4DigitNumber();
             string guess = Mock4DigitNumber();
-            string value = gameLogic.checkGuess(numberCode, guess);
-            Assert.AreEqual("BBBB,", value);
+            string checkedGuess = gameLogic.CheckGuess(code, guess);
+            Assert.AreEqual("BBBB,", checkedGuess);
         }
 
         [TestMethod]
@@ -66,10 +62,10 @@ namespace CleanCodeLabTests.Tests
         {
             IUI MockUI = new MockIO();
             IGameLogic gameLogic = new MooGame();
-            string numberCode = Mock4DigitNumber();
+            string code = Mock4DigitNumber();
             string guess = MockUI.GetString();
-            string value = gameLogic.checkGuess(numberCode, guess);
-            Assert.AreEqual("BB,C", value);
+            string checkedGuess = gameLogic.CheckGuess(code, guess);
+            Assert.AreEqual("BB,C", checkedGuess);
         }
 
         private string Mock4DigitNumber()

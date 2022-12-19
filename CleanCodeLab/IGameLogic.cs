@@ -2,9 +2,9 @@ namespace CleanCodeLab
 {
     public interface IGameLogic
     {
-        string checkGuess(string code, string guess);
-        string correctGuess();
-        string exampleGuess();
-        string generateRandomCode();
+        string CheckGuess(string code, string guess);
+        string CorrectGuess();
+        string ExampleGuess();
+        string GenerateRandomCode();
     }
 }

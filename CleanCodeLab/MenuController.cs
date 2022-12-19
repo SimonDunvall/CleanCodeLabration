@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CleanCodeLab
 {
     public class MenuController
@@ -19,14 +14,14 @@ namespace CleanCodeLab
         internal void Run()
         {
             bool IsGameChosen;
-            string input;
+            string choosenGame;
             do
             {
                 ui.DisplayString("Do you want to play Moogame or Mastermind?\n");
-                input = ui.GetString().Trim().ToLower();
-                IsGameChosen = choseGame(input);
+                choosenGame = ui.GetString().Trim().ToLower();
+                IsGameChosen = choseGame(choosenGame);
             } while (!IsGameChosen);
-            menu.StartGame(ui, input);
+            menu.RunGame(ui, choosenGame);
         }
 
         private bool choseGame(string input)

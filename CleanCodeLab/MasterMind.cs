@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CleanCodeLab
 {
     public class MasterMind : IGameLogic
     {
-        public string checkGuess(string code, string guess)
+        public string CheckGuess(string code, string guess)
         {
             string result = "|";
             string[] guessedColors = guess.Split(new string[] { ", " }, StringSplitOptions.None);
@@ -30,7 +25,7 @@ namespace CleanCodeLab
             return result;
         }
 
-        public string generateRandomCode()
+        public string GenerateRandomCode()
         {
             Random rnd = new Random();
             string[] colors = { "red", "green", "white", "orange", "black", "blue", "yellow", "brown" };
@@ -41,20 +36,20 @@ namespace CleanCodeLab
                 string choosenColor = colors[index];
                 code.Add(choosenColor);
             }
-            return ToString(code);
+            return toString(code);
         }
 
-        private string ToString(List<string> code)
+        private string toString(List<string> code)
         {
             return string.Join(", ", code);
         }
 
-        public string exampleGuess()
+        public string ExampleGuess()
         {
             return "black, white, red, blue, orange";
         }
 
-        public string correctGuess()
+        public string CorrectGuess()
         {
             return "|B|B|B|B|B|";
         }

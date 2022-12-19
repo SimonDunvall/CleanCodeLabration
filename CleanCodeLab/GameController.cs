@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CleanCodeLab
 {
     public class GameController
@@ -18,45 +13,37 @@ namespace CleanCodeLab
             gameLogic = g;
         }
 
-        public void Run()
+        public void StartGame()
         {
-            string answer;
-
+            string play;
             ui.DisplayString("Enter your user name:\n");
             string playerName = ui.GetString();
-
             do
             {
                 display();
-
                 int nGuess = handleGame();
-
                 handleStatistics(playerName, nGuess);
-
                 ui.DisplayString("Correct, it took " + nGuess + " guesses\nContinue?");
-                answer = ui.GetString();
-            } while (answer != null && answer != "" && answer.Substring(0, 1) != "n");
+                play = ui.GetString();
+            } while (play != null && play != "" && play.Substring(0, 1) != "n");
         }
 
         private void handleStatistics(string playerName, int nGuess)
         {
             scoreBoard.AddData(playerName, nGuess);
-            scoreBoard.displayData();
+            scoreBoard.DisplayData();
         }
 
         private int handleGame()
         {
-            string code = gameLogic.generateRandomCode();
-
+            string code = gameLogic.GenerateRandomCode();
             //comment out or remove next line to play real games!
             ui.DisplayString("For practice, code is: " + code + "\n");
-
-            int nGuess = RunGameLogic(code);
-
+            int nGuess = runGameLogic(code);
             return nGuess;
         }
 
-        private int RunGameLogic(string code)
+        private int runGameLogic(string code)
         {
             int nGuess = 0;
             string checkedGuess;
@@ -65,16 +52,16 @@ namespace CleanCodeLab
                 nGuess++;
                 string guess = ui.GetString().Trim();
                 ui.DisplayString(guess + "\n");
-                checkedGuess = gameLogic.checkGuess(code, guess);
+                checkedGuess = gameLogic.CheckGuess(code, guess);
                 ui.DisplayString(checkedGuess + "\n");
-            } while (checkedGuess != gameLogic.correctGuess());
+            } while (checkedGuess != gameLogic.CorrectGuess());
             return nGuess;
         }
 
         private void display()
         {
             ui.DisplayString("New game:");
-            ui.DisplayString($"guess example: {gameLogic.exampleGuess()} \n");
+            ui.DisplayString($"guess example: {gameLogic.ExampleGuess()} \n");
         }
     }
 }

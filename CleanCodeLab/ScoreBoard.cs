@@ -16,7 +16,7 @@ namespace CleanCodeLab
             this.game = game;
         }
 
-        public void displayData()
+        public void DisplayData()
         {
             displayScoreBoard(getData());
         }

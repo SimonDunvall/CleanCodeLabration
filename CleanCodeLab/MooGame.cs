@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CleanCodeLab
 {
 
     public class MooGame : IGameLogic
     {
-        public string generateRandomCode()
+        public string GenerateRandomCode()
         {
             Random rnd = new Random();
             string code = "";
@@ -24,7 +19,7 @@ namespace CleanCodeLab
             return code;
         }
 
-        public string checkGuess(string code, string guess)
+        public string CheckGuess(string code, string guess)
         {
             int numberOfCs = 0, numberOfBs = 0;
             guess += "    ";     // if player entered less than 4 chars
@@ -46,17 +41,12 @@ namespace CleanCodeLab
             return "BBBB".Substring(0, numberOfBs) + "," + "CCCC".Substring(0, numberOfCs);
         }
 
-        private void Input()
-        {
-            throw new NotImplementedException();
-        }
-
-        public string exampleGuess()
+        public string ExampleGuess()
         {
             return "1234";
         }
 
-        public string correctGuess()
+        public string CorrectGuess()
         {
             return "BBBB,";
         }

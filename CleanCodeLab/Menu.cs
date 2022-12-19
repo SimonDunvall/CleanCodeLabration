@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace CleanCodeLab
 {
     public class Menu
@@ -24,15 +19,15 @@ namespace CleanCodeLab
             this.gameLogic = gameLogic;
         }
 
-        internal void StartGame(IUI ui, string game)
+        internal void RunGame(IUI ui, string game)
         {
             if (gameLogic == null)
             {
                 throw new NullReferenceException();
             }
-            IDataBase s = new ScoreBoard(ui, game);
-            GameController controller = new GameController(ui, s, gameLogic);
-            controller.Run();
+            IDataBase scoreBoard = new ScoreBoard(ui, game);
+            GameController controller = new GameController(ui, scoreBoard, gameLogic);
+            controller.StartGame();
         }
     }
 }
