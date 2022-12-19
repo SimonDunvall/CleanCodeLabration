@@ -49,10 +49,10 @@ namespace CleanCodeLab
         private List<PlayerData> ConvertToPlayerDataList(StreamReader input)
         {
             List<PlayerData> results = new List<PlayerData>();
-            string? line;
-            while ((line = input.ReadLine()) != null)
+            string? data;
+            while ((data = input.ReadLine()) != null)
             {
-                PlayerData pd = CreatePlayerFromString(line);
+                PlayerData pd = CreatePlayerFromString(data);
 
                 if (pd.Game != game)
                 {
@@ -71,9 +71,9 @@ namespace CleanCodeLab
             return results;
         }
 
-        private PlayerData CreatePlayerFromString(string line)
+        private PlayerData CreatePlayerFromString(string s)
         {
-            string[] gameNameAndScore = line.Split(new string[] { "#&#" }, StringSplitOptions.None);
+            string[] gameNameAndScore = s.Split(new string[] { "#&#" }, StringSplitOptions.None);
             string game = gameNameAndScore[0];
             string playerName = gameNameAndScore[1];
             int guesses = Convert.ToInt32(gameNameAndScore[2]);
