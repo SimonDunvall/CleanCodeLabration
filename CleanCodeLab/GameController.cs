@@ -57,8 +57,23 @@ namespace CleanCodeLab
             //comment out or remove next line to play real games!
             ui.DisplayString("For practice, code is: " + code + "\n");
 
-            int nGuess = gameLogic.RunGame(code);
+            int nGuess = RunGameLogic(code);
 
+            return nGuess;
+        }
+
+        private int RunGameLogic(string code)
+        {
+            int nGuess = 0;
+            string checkedGuess;
+            do
+            {
+                nGuess++;
+                string guess = ui.GetString().Trim();
+                ui.DisplayString(guess + "\n");
+                checkedGuess = gameLogic.checkGuess(code, guess);
+                ui.DisplayString(checkedGuess + "\n");
+            } while (checkedGuess != gameLogic.correctGuess());
             return nGuess;
         }
     }

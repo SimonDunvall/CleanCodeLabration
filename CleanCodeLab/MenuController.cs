@@ -34,12 +34,12 @@ namespace CleanCodeLab
         {
             if (input == "moogame")
             {
-                menu.SetGame(new MooGame(ui));
+                menu.SetGame(new MooGame());
                 return true;
             }
             else if (input == "mastermind")
             {
-                menu.SetGame(new MasterMind(ui));
+                menu.SetGame(new MasterMind());
                 return true;
             }
             return false;

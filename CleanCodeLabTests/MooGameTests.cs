@@ -14,8 +14,7 @@ namespace CleanCodeLabTests.Tests
         [TestMethod]
         public void RandomNumbersAreUnique()
         {
-            IUI MockUI = new MockIO();
-            IGameLogic gameLogic = new MooGame(MockUI);
+            IGameLogic gameLogic = new MooGame();
             string value = gameLogic.GenerateRandomCode();
             bool IsUnique = IsStringUnique(value);
             Assert.IsTrue(IsUnique);
@@ -39,8 +38,7 @@ namespace CleanCodeLabTests.Tests
         [TestMethod]
         public void NumberCodeIsRightLength()
         {
-            IUI MockUI = new MockIO();
-            IGameLogic gameLogic = new MooGame(MockUI);
+            IGameLogic gameLogic = new MooGame();
             string value = gameLogic.GenerateRandomCode();
             Assert.AreEqual(4, value.Length);
         }
@@ -48,8 +46,7 @@ namespace CleanCodeLabTests.Tests
         [TestMethod]
         public void CheckIfStringOnlyContainsNumbers()
         {
-            IUI MockUI = new MockIO();
-            IGameLogic gameLogic = new MooGame(MockUI);
+            IGameLogic gameLogic = new MooGame();
             string value = gameLogic.GenerateRandomCode();
             Assert.IsTrue(Regex.IsMatch(value, "^[0-9]+$"));
         }
@@ -57,8 +54,7 @@ namespace CleanCodeLabTests.Tests
         [TestMethod]
         public void GuessIsRight()
         {
-            IUI MockUI = new MockIO();
-            IGameLogic gameLogic = new MooGame(MockUI);
+            IGameLogic gameLogic = new MooGame();
             string numberCode = Mock4DigitNumber();
             string guess = Mock4DigitNumber();
             string value = gameLogic.checkGuess(numberCode, guess);
@@ -69,7 +65,7 @@ namespace CleanCodeLabTests.Tests
         public void GuessGivesPredictedOutCome()
         {
             IUI MockUI = new MockIO();
-            IGameLogic gameLogic = new MooGame(MockUI);
+            IGameLogic gameLogic = new MooGame();
             string numberCode = Mock4DigitNumber();
             string guess = MockUI.GetString();
             string value = gameLogic.checkGuess(numberCode, guess);

@@ -7,13 +7,6 @@ namespace CleanCodeLab
 {
     public class MasterMind : IGameLogic
     {
-        private IUI ui;
-
-        public MasterMind(IUI ui)
-        {
-            this.ui = ui;
-        }
-
         public string checkGuess(string code, string guess)
         {
             string result = "|";
@@ -56,25 +49,14 @@ namespace CleanCodeLab
             return string.Join(", ", code);
         }
 
-        public int RunGame(string code)
-        {
-            int nGuess = 0;
-            string checkedGuess;
-            do
-            {
-                nGuess++;
-                string guess = ui.GetString().Trim();
-                ui.DisplayString(guess + "\n");
-                checkedGuess = checkGuess(code, guess);
-                ui.DisplayString(checkedGuess + "\n");
-            } while (checkedGuess != "|B|B|B|B|B|");
-
-            return nGuess;
-        }
-
         public string exampleGuess()
         {
             return "black, white, red, blue, orange";
+        }
+
+        public string correctGuess()
+        {
+            return "|B|B|B|B|B|";
         }
     }
 }

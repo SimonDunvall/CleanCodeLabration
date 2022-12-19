@@ -8,13 +8,6 @@ namespace CleanCodeLab
 
     public class MooGame : IGameLogic
     {
-        private IUI ui;
-
-        public MooGame(IUI ui)
-        {
-            this.ui = ui;
-        }
-
         public string GenerateRandomCode()
         {
             Random rnd = new Random();
@@ -53,23 +46,6 @@ namespace CleanCodeLab
             return "BBBB".Substring(0, numberOfBs) + "," + "CCCC".Substring(0, numberOfCs);
         }
 
-        public int RunGame(string code)
-        {
-            int nGuess = 0;
-            string checkedGuess;
-            do
-            {
-                nGuess++;
-                string guess = ui.GetString().Trim();
-                ui.DisplayString(guess + "\n");
-                checkedGuess = checkGuess(code, guess);
-                ui.DisplayString(checkedGuess + "\n");
-
-            } while (checkedGuess != "BBBB,");
-
-            return nGuess;
-        }
-
         private void Input()
         {
             throw new NotImplementedException();
@@ -78,6 +54,11 @@ namespace CleanCodeLab
         public string exampleGuess()
         {
             return "1234";
+        }
+
+        public string correctGuess()
+        {
+            return "BBBB,";
         }
     }
 }
