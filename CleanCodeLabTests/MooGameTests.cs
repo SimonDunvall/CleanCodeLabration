@@ -9,13 +9,13 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CleanCodeLabTests.Tests
 {
     [TestClass]
-    public class GameLogicTests
+    public class MooGameTests
     {
         [TestMethod]
         public void RandomNumbersAreUnique()
         {
             IUI MockUI = new MockIO();
-            GameLogic gameLogic = new GameLogic(MockUI);
+            IGameLogic gameLogic = new MooGame(MockUI);
             string value = gameLogic.GenerateRandomCode();
             bool IsUnique = IsStringUnique(value);
             Assert.IsTrue(IsUnique);
@@ -40,7 +40,7 @@ namespace CleanCodeLabTests.Tests
         public void NumberCodeIsRightLength()
         {
             IUI MockUI = new MockIO();
-            GameLogic gameLogic = new GameLogic(MockUI);
+            IGameLogic gameLogic = new MooGame(MockUI);
             string value = gameLogic.GenerateRandomCode();
             Assert.AreEqual(4, value.Length);
         }
@@ -49,7 +49,7 @@ namespace CleanCodeLabTests.Tests
         public void CheckIfStringOnlyContainsNumbers()
         {
             IUI MockUI = new MockIO();
-            GameLogic gameLogic = new GameLogic(MockUI);
+            IGameLogic gameLogic = new MooGame(MockUI);
             string value = gameLogic.GenerateRandomCode();
             Assert.IsTrue(Regex.IsMatch(value, "^[0-9]+$"));
         }
@@ -58,7 +58,7 @@ namespace CleanCodeLabTests.Tests
         public void GuessIsRight()
         {
             IUI MockUI = new MockIO();
-            GameLogic gameLogic = new GameLogic(MockUI);
+            IGameLogic gameLogic = new MooGame(MockUI);
             string numberCode = Mock4DigitNumber();
             string guess = Mock4DigitNumber();
             string value = gameLogic.checkGuess(numberCode, guess);
@@ -69,7 +69,7 @@ namespace CleanCodeLabTests.Tests
         public void GuessGivesPredictedOutCome()
         {
             IUI MockUI = new MockIO();
-            GameLogic gameLogic = new GameLogic(MockUI);
+            IGameLogic gameLogic = new MooGame(MockUI);
             string numberCode = Mock4DigitNumber();
             string guess = MockUI.GetString();
             string value = gameLogic.checkGuess(numberCode, guess);

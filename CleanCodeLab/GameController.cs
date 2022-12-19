@@ -9,9 +9,9 @@ namespace CleanCodeLab
     {
         private IUI ui;
         private ScoreBoard scoreBoard;
-        private GameLogic gameLogic;
+        private IGameLogic gameLogic;
 
-        public GameController(IUI ui, ScoreBoard s, GameLogic g)
+        public GameController(IUI ui, ScoreBoard s, IGameLogic g)
         {
             this.ui = ui;
             scoreBoard = s;

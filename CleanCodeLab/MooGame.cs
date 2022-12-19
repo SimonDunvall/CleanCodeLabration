@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 namespace CleanCodeLab
 {
 
-    public class GameLogic : IGameLogic
+    public class MooGame : IGameLogic
     {
         private IUI ui;
 
-        public GameLogic(IUI ui)
+        public MooGame(IUI ui)
         {
             this.ui = ui;
         }
@@ -18,29 +18,29 @@ namespace CleanCodeLab
         public string GenerateRandomCode()
         {
             Random randomGenerator = new Random();
-            string numberCode = "";
-            while (numberCode.Length < 4)
+            string code = "";
+            while (code.Length < 4)
             {
                 string randomDigit;
                 do
                 {
                     randomDigit = randomGenerator.Next(10).ToString();
-                } while (numberCode.Contains(randomDigit));
-                numberCode += randomDigit;
+                } while (code.Contains(randomDigit));
+                code += randomDigit;
             }
-            return numberCode;
+            return code;
         }
 
-        public string checkGuess(string numberCode, string guess)
+        public string checkGuess(string code, string guess)
         {
             int numberOfCs = 0, numberOfBs = 0;
             guess += "    ";     // if player entered less than 4 chars
             foreach (char digit in guess)
             {
-                if (numberCode.Contains(digit))
+                if (code.Contains(digit))
                 {
                     int index = guess.IndexOf(digit);
-                    if (numberCode[index] == digit)
+                    if (code[index] == digit)
                     {
                         numberOfBs++;
                     }
@@ -53,7 +53,7 @@ namespace CleanCodeLab
             return "BBBB".Substring(0, numberOfBs) + "," + "CCCC".Substring(0, numberOfCs);
         }
 
-        public int RunGame(string numberCode)
+        public int RunGame(string code)
         {
             int nGuess = 0;
             string checkedGuess;
@@ -62,7 +62,7 @@ namespace CleanCodeLab
                 nGuess++;
                 string guess = ui.GetString().Trim();
                 ui.DisplayString(guess + "\n");
-                checkedGuess = checkGuess(numberCode, guess);
+                checkedGuess = checkGuess(code, guess);
                 ui.DisplayString(checkedGuess + "\n");
             } while (checkedGuess != "BBBB,");
 
