@@ -18,7 +18,7 @@ namespace CleanCodeLab
             gameLogic = g;
         }
 
-        public void RunGame()
+        public void Run()
         {
             string answer;
 
@@ -46,22 +46,12 @@ namespace CleanCodeLab
 
         private int handleGame()
         {
-            string numberCode = gameLogic.make4DigitNumber();
+            string numberCode = gameLogic.GenerateRandomCode();
 
             //comment out or remove next line to play real games!
             ui.DisplayString("For practice, number is: " + numberCode + "\n");
 
-
-            int nGuess = 0;
-            string checkedGuess;
-            do
-            {
-                nGuess++;
-                string guess = ui.GetString().Trim();
-                ui.DisplayString(guess + "\n");
-                checkedGuess = gameLogic.checkGuess(numberCode, guess);
-                ui.DisplayString(checkedGuess + "\n");
-            } while (checkedGuess != "BBBB,");
+            int nGuess = gameLogic.RunGame(numberCode);
 
             return nGuess;
         }

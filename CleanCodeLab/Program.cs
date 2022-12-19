@@ -11,9 +11,9 @@ namespace CleanCodeLab
         {
             IUI ui = new ConsoleIO();
             ScoreBoard scoreBoard = new ScoreBoard(ui);
-            GameLogic gameLogic = new GameLogic();
+            GameLogic gameLogic = new GameLogic(ui);
             GameController controller = new GameController(ui, scoreBoard, gameLogic);
-            controller.RunGame();
+            controller.Run();
         }
     }
 }

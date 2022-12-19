@@ -5,9 +5,17 @@ using System.Threading.Tasks;
 
 namespace CleanCodeLab
 {
-    public class GameLogic
+
+    public class GameLogic : IGameLogic
     {
-        public string make4DigitNumber()
+        private IUI ui;
+
+        public GameLogic(IUI ui)
+        {
+            this.ui = ui;
+        }
+
+        public string GenerateRandomCode()
         {
             Random randomGenerator = new Random();
             string numberCode = "";
@@ -43,6 +51,22 @@ namespace CleanCodeLab
                 }
             }
             return "BBBB".Substring(0, numberOfBs) + "," + "CCCC".Substring(0, numberOfCs);
+        }
+
+        public int RunGame(string numberCode)
+        {
+            int nGuess = 0;
+            string checkedGuess;
+            do
+            {
+                nGuess++;
+                string guess = ui.GetString().Trim();
+                ui.DisplayString(guess + "\n");
+                checkedGuess = checkGuess(numberCode, guess);
+                ui.DisplayString(checkedGuess + "\n");
+            } while (checkedGuess != "BBBB,");
+
+            return nGuess;
         }
     }
 }
